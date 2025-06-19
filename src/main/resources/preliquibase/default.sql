@@ -1,0 +1,1 @@
+CREATE SCHEMA IF NOT EXISTS wallet_schema AUTHORIZATION postgres;

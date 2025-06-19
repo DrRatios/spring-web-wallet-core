@@ -1,0 +1,28 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /web-wallet-core
+spring:
+  application:
+    name: spring-web-wallet-core
+  config:
+    import:
+      - optional:file:../../../.env
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${spring.datasource.url}
+    username: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+  liquibase:
+    change-log: classpath:/db/changelog/2025/06/19-01-changelog.xml
+    default-schema: wallet_schema
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        jdbc:
+          batch_versioned_data: true
+          optimistic_locking_failure: true
+        default_schema: wallet_schema
+
