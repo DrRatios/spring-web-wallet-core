@@ -26,13 +26,19 @@ public class GlobalExceptionHandler {
     @ExceptionHandler
     public ResponseEntity<AppError> catchInsufficientFundsException(InsufficientFundsException e) {
         log.error(e.getMessage(), e);
-        return new ResponseEntity<>(new AppError("Insufficient Funds Exception ", e.getMessage()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new AppError("NOT ENOUGH FUNDS IN THE WALLET ", e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler
     public ResponseEntity<AppError> catchWalletServiceException(WalletServiceException e) {
         log.error(e.getMessage(), e);
         return new ResponseEntity<>(new AppError("WALLET SERVICE ERROR ", e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<AppError> handleAllUncaughtException(Exception e) {
+        log.error(e.getMessage(), e);
+        return new ResponseEntity<>(new AppError("WALLET SERVICE IS BROKEN ", e.getMessage()),  HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }
